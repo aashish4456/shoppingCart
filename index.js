@@ -41,9 +41,9 @@ let shopItemsData = [
       <div class="price-quantity">
         <h2>$ ${price} </h2>
         <div class="buttons">
-          <i onclick="decrement(${id})" class="bi bi-dash-lg"></i>
+          <i onclick="decrement(${id})" class="bi bi-dash-lg" ></i>
           <div id=${id} class="quantity">0</div>
-          <i onclick="increment(${id})" class="bi bi-plus-lg"></i>
+          <i onclick="increment(${id})" class="bi bi-plus-lg" ></i>
         </div>
       </div>
     </div>
@@ -53,3 +53,39 @@ let shopItemsData = [
 
 };  
 generateShop();
+let basket =[{
+
+}];
+
+
+let increment=(id)=>{
+    let selectItem=id;
+    let search=basket.find((x)=>(x.id === selectItem.id));
+    if(search === undefined)
+{
+    basket.push({
+        id : selectItem.id,
+        item:1,
+    });
+}
+else{
+      search.item+=1;
+}  
+   update(selectItem.id);
+};
+ let decrement=(id)=>{
+    let selectItem=id;
+    let search=basket.find((x)=>(x.id === selectItem.id));
+    if(search === undefined)
+        return;
+else if (selectItem === 0)
+return;
+else{
+      search.item-=1;
+}  
+update(selectItem.id); 
+ };
+ let update=(id)=>{
+    let search=basket.find((x)=>x.id===id);
+    document.getElementById(id).innerHTML=search.item;
+ }
